@@ -1,0 +1,262 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "PruebaInstanciaPython": {
+        "id": "PruebaInstanciaPython",
+        "path": "PruebaInstanciaPython",
+        "children": {
+          "ExistingVpc": {
+            "id": "ExistingVpc",
+            "path": "PruebaInstanciaPython/ExistingVpc",
+            "children": {
+              "PublicSubnet1": {
+                "id": "PublicSubnet1",
+                "path": "PruebaInstanciaPython/ExistingVpc/PublicSubnet1",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.158.0"
+                }
+              },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "PruebaInstanciaPython/ExistingVpc/PublicSubnet2",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.158.0"
+                }
+              },
+              "PublicSubnet3": {
+                "id": "PublicSubnet3",
+                "path": "PruebaInstanciaPython/ExistingVpc/PublicSubnet3",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.158.0"
+                }
+              },
+              "PublicSubnet4": {
+                "id": "PublicSubnet4",
+                "path": "PruebaInstanciaPython/ExistingVpc/PublicSubnet4",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.158.0"
+                }
+              },
+              "PublicSubnet5": {
+                "id": "PublicSubnet5",
+                "path": "PruebaInstanciaPython/ExistingVpc/PublicSubnet5",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.158.0"
+                }
+              },
+              "PublicSubnet6": {
+                "id": "PublicSubnet6",
+                "path": "PruebaInstanciaPython/ExistingVpc/PublicSubnet6",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.158.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.158.0"
+            }
+          },
+          "ExistingRole": {
+            "id": "ExistingRole",
+            "path": "PruebaInstanciaPython/ExistingRole",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.158.0"
+            }
+          },
+          "WebServerInstance": {
+            "id": "WebServerInstance",
+            "path": "PruebaInstanciaPython/WebServerInstance",
+            "children": {
+              "InstanceSecurityGroup": {
+                "id": "InstanceSecurityGroup",
+                "path": "PruebaInstanciaPython/WebServerInstance/InstanceSecurityGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "PruebaInstanciaPython/WebServerInstance/InstanceSecurityGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "PruebaInstanciaPython/WebServerInstance/InstanceSecurityGroup",
+                        "securityGroupEgress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "description": "Allow all outbound traffic by default",
+                            "ipProtocol": "-1"
+                          }
+                        ],
+                        "securityGroupIngress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "ipProtocol": "tcp",
+                            "fromPort": 80,
+                            "toPort": 80,
+                            "description": "Allow HTTP traffic on port 80"
+                          },
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "ipProtocol": "tcp",
+                            "fromPort": 22,
+                            "toPort": 22,
+                            "description": "Allow SSH traffic on port 22"
+                          },
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "ipProtocol": "tcp",
+                            "fromPort": 8000,
+                            "toPort": 8000,
+                            "description": "Allow HTTP traffic on port 8000"
+                          },
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "ipProtocol": "tcp",
+                            "fromPort": 8080,
+                            "toPort": 8080,
+                            "description": "Allow HTTP traffic on port 8080"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "PruebaInstanciaPython/WebServerInstance"
+                          }
+                        ],
+                        "vpcId": "vpc-0eb704c4b30fa3b0c"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                      "version": "2.158.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                  "version": "2.158.0"
+                }
+              },
+              "InstanceProfile": {
+                "id": "InstanceProfile",
+                "path": "PruebaInstanciaPython/WebServerInstance/InstanceProfile",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                  "aws:cdk:cloudformation:props": {
+                    "roles": [
+                      "LabRole"
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
+                  "version": "2.158.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "PruebaInstanciaPython/WebServerInstance/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
+                  "aws:cdk:cloudformation:props": {
+                    "availabilityZone": "us-east-1a",
+                    "iamInstanceProfile": {
+                      "Ref": "WebServerInstanceInstanceProfile0D4CFA1E"
+                    },
+                    "imageId": "ami-03a4942b8fcc1f29d",
+                    "instanceType": "t2.micro",
+                    "securityGroupIds": [
+                      {
+                        "Fn::GetAtt": [
+                          "WebServerInstanceInstanceSecurityGroupCA0A5891",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnetId": "subnet-008feddb3c22a5391",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "PruebaInstanciaPython/WebServerInstance"
+                      }
+                    ],
+                    "userData": {
+                      "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y apache2 git\nsudo systemctl start apache2\nsudo systemctl enable apache2\nsudo echo 'Listen 8000' >> /etc/apache2/ports.conf\nsudo echo 'Listen 8080' >> /etc/apache2/ports.conf\nsudo git clone https://github.com/joelm2405/websimple.git /var/www/websimple\nsudo git clone https://github.com/joelm2405/webplantilla.git /var/www/webplantilla\necho '<VirtualHost *:8000>' | sudo tee /etc/apache2/sites-available/websimple.conf\necho '    DocumentRoot /var/www/websimple' | sudo tee -a /etc/apache2/sites-available/websimple.conf\necho '    ErrorLog ${APACHE_LOG_DIR}/error.log' | sudo tee -a /etc/apache2/sites-available/websimple.conf\necho '    CustomLog ${APACHE_LOG_DIR}/access.log combined' | sudo tee -a /etc/apache2/sites-available/websimple.conf\necho '</VirtualHost>' | sudo tee -a /etc/apache2/sites-available/websimple.conf\necho '<VirtualHost *:8080>' | sudo tee /etc/apache2/sites-available/webplantilla.conf\necho '    DocumentRoot /var/www/webplantilla' | sudo tee -a /etc/apache2/sites-available/webplantilla.conf\necho '    ErrorLog ${APACHE_LOG_DIR}/error.log' | sudo tee -a /etc/apache2/sites-available/webplantilla.conf\necho '    CustomLog ${APACHE_LOG_DIR}/access.log combined' | sudo tee -a /etc/apache2/sites-available/webplantilla.conf\necho '</VirtualHost>' | sudo tee -a /etc/apache2/sites-available/webplantilla.conf\nsudo a2ensite websimple\nsudo a2ensite webplantilla\nsudo systemctl restart apache2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
+                  "version": "2.158.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Instance",
+              "version": "2.158.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "PruebaInstanciaPython/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "PruebaInstanciaPython/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.158.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "PruebaInstanciaPython/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.158.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "PruebaInstanciaPython/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.158.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.158.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.3.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.158.0"
+    }
+  }
+}

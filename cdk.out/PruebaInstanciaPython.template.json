@@ -1,0 +1,143 @@
+{
+ "Resources": {
+  "WebServerInstanceInstanceSecurityGroupCA0A5891": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "PruebaInstanciaPython/WebServerInstance/InstanceSecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow HTTP traffic on port 80",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow SSH traffic on port 22",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow HTTP traffic on port 8000",
+      "FromPort": 8000,
+      "IpProtocol": "tcp",
+      "ToPort": 8000
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow HTTP traffic on port 8080",
+      "FromPort": 8080,
+      "IpProtocol": "tcp",
+      "ToPort": 8080
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "PruebaInstanciaPython/WebServerInstance"
+     }
+    ],
+    "VpcId": "vpc-0eb704c4b30fa3b0c"
+   },
+   "Metadata": {
+    "aws:cdk:path": "PruebaInstanciaPython/WebServerInstance/InstanceSecurityGroup/Resource"
+   }
+  },
+  "WebServerInstanceInstanceProfile0D4CFA1E": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     "LabRole"
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "PruebaInstanciaPython/WebServerInstance/InstanceProfile"
+   }
+  },
+  "WebServerInstance8A1D687E": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": "us-east-1a",
+    "IamInstanceProfile": {
+     "Ref": "WebServerInstanceInstanceProfile0D4CFA1E"
+    },
+    "ImageId": "ami-03a4942b8fcc1f29d",
+    "InstanceType": "t2.micro",
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "WebServerInstanceInstanceSecurityGroupCA0A5891",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": "subnet-008feddb3c22a5391",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "PruebaInstanciaPython/WebServerInstance"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y apache2 git\nsudo systemctl start apache2\nsudo systemctl enable apache2\nsudo echo 'Listen 8000' >> /etc/apache2/ports.conf\nsudo echo 'Listen 8080' >> /etc/apache2/ports.conf\nsudo git clone https://github.com/joelm2405/websimple.git /var/www/websimple\nsudo git clone https://github.com/joelm2405/webplantilla.git /var/www/webplantilla\necho '<VirtualHost *:8000>' | sudo tee /etc/apache2/sites-available/websimple.conf\necho '    DocumentRoot /var/www/websimple' | sudo tee -a /etc/apache2/sites-available/websimple.conf\necho '    ErrorLog ${APACHE_LOG_DIR}/error.log' | sudo tee -a /etc/apache2/sites-available/websimple.conf\necho '    CustomLog ${APACHE_LOG_DIR}/access.log combined' | sudo tee -a /etc/apache2/sites-available/websimple.conf\necho '</VirtualHost>' | sudo tee -a /etc/apache2/sites-available/websimple.conf\necho '<VirtualHost *:8080>' | sudo tee /etc/apache2/sites-available/webplantilla.conf\necho '    DocumentRoot /var/www/webplantilla' | sudo tee -a /etc/apache2/sites-available/webplantilla.conf\necho '    ErrorLog ${APACHE_LOG_DIR}/error.log' | sudo tee -a /etc/apache2/sites-available/webplantilla.conf\necho '    CustomLog ${APACHE_LOG_DIR}/access.log combined' | sudo tee -a /etc/apache2/sites-available/webplantilla.conf\necho '</VirtualHost>' | sudo tee -a /etc/apache2/sites-available/webplantilla.conf\nsudo a2ensite websimple\nsudo a2ensite webplantilla\nsudo systemctl restart apache2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "PruebaInstanciaPython/WebServerInstance/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2WNywrCMBAAv6X3zWqjgncP4q20HyBx3eLaNpE8KCXk30WkIHgaGAZGY3044rYyc1B0H9QoN8xdNDRAy8ElTwxmDtfMpDFfbIjGEkPHlLzE5exdesGpt39iTQuImfBHNN71MnL5ROuiQLPEh7ObHdYa99UziCifbJSJsf3yDR98bvCqAAAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "PruebaInstanciaPython/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

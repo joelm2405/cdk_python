@@ -1,0 +1,20 @@
+{
+  "version": "36.0.25",
+  "files": {
+    "30965ad5a06a736471aba969750cafac7ca569786b9dce9c4bfc5b3d49c179c9": {
+      "source": {
+        "path": "WebAppStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "374889461091-us-east-1": {
+          "bucketName": "pruebacloudd",
+          "objectKey": "30965ad5a06a736471aba969750cafac7ca569786b9dce9c4bfc5b3d49c179c9.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:aws:iam::374889461091:role/LabRole"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

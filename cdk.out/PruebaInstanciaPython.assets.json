@@ -1,0 +1,20 @@
+{
+  "version": "36.0.25",
+  "files": {
+    "9105ec365e788f68575deb6993f3a68c41ec999c83d0cfa225231994886716a4": {
+      "source": {
+        "path": "PruebaInstanciaPython.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "374889461091-us-east-1": {
+          "bucketName": "pruebacloudd",
+          "objectKey": "9105ec365e788f68575deb6993f3a68c41ec999c83d0cfa225231994886716a4.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:aws:iam::374889461091:role/LabRole"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

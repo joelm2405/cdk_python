@@ -1,0 +1,83 @@
+{
+  "version": "36.0.25",
+  "artifacts": {
+    "PruebaInstanciaPython.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "PruebaInstanciaPython.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "PruebaInstanciaPython": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://374889461091/us-east-1",
+      "properties": {
+        "templateFile": "PruebaInstanciaPython.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:aws:iam::374889461091:role/LabRole",
+        "cloudFormationExecutionRoleArn": "arn:aws:iam::374889461091:role/LabRole",
+        "stackTemplateAssetObjectUrl": "s3://pruebacloudd/9105ec365e788f68575deb6993f3a68c41ec999c83d0cfa225231994886716a4.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "PruebaInstanciaPython.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::374889461091:role/cdk-hnb659fds-lookup-role-374889461091-us-east-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "PruebaInstanciaPython.assets"
+      ],
+      "metadata": {
+        "/PruebaInstanciaPython/WebServerInstance/InstanceSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WebServerInstanceInstanceSecurityGroupCA0A5891"
+          }
+        ],
+        "/PruebaInstanciaPython/WebServerInstance/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WebServerInstanceInstanceProfile0D4CFA1E"
+          }
+        ],
+        "/PruebaInstanciaPython/WebServerInstance/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WebServerInstance8A1D687E"
+          }
+        ],
+        "/PruebaInstanciaPython/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/PruebaInstanciaPython/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/PruebaInstanciaPython/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "PruebaInstanciaPython"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}
